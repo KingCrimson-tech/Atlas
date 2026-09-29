@@ -2,6 +2,7 @@
   "promptDelete": false,
   "userIgnoreFilters": [
     "\\.github",
-    "quartz\\.config\\.yaml"
+    "quartz\\.config\\.yaml",
+    "quartz\\.lock\\.json"
   ]
 }

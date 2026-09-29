@@ -45,6 +45,11 @@ jobs:
           cp -r vault/Notes vault/Projects engine/content/
           cp vault/index.md engine/content/index.md
           cp vault/quartz.config.yaml engine/quartz.config.yaml
+          cp vault/quartz.lock.json engine/quartz.lock.json
+
+      - name: Install Quartz plugins
+        working-directory: engine
+        run: npx quartz plugin install
 
       - name: Build site
         working-directory: engine
