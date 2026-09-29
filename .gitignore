@@ -9,6 +9,7 @@
 
 # Quartz build output & cache
 public/
+.quartz/
 .quartz-cache/
 quartz/.quartz-cache/
 

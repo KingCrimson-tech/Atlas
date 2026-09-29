@@ -1,0 +1,67 @@
+name: Deploy Atlas site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout vault
+        uses: actions/checkout@v4
+        with:
+          path: vault
+          fetch-depth: 1
+
+      - name: Clone Quartz engine
+        run: git clone --depth 1 https://github.com/jackyzha0/quartz engine
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: engine/package-lock.json
+
+      - name: Install engine dependencies
+        working-directory: engine
+        run: npm ci
+
+      - name: Assemble content from vault
+        run: |
+          mkdir -p engine/content
+          cp -r vault/Notes vault/Projects engine/content/
+          cp vault/index.md engine/content/index.md
+          cp vault/quartz.config.yaml engine/quartz.config.yaml
+
+      - name: Build site
+        working-directory: engine
+        run: npx quartz build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: engine/public
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,3 +1,7 @@
 {
-  "promptDelete": false
+  "promptDelete": false,
+  "userIgnoreFilters": [
+    "\\.github",
+    "quartz\\.config\\.yaml"
+  ]
 }
