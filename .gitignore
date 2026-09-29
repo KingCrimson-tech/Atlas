@@ -1,0 +1,20 @@
+# Obsidian workspace / cache - machine specific, don't sync
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache/
+.obsidian/hotkeys.json
+
+# Obsidian trash
+.trash/
+
+# Quartz build output & cache
+public/
+.quartz-cache/
+quartz/.quartz-cache/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
