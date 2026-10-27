@@ -2,8 +2,6 @@
 
 > A self-hosted miniature Sentry: a Python SDK that reports exceptions, a FastAPI backend that groups duplicates, SQLite for storage, and a zero-build dashboard for triage.
 
-![Buggy dashboard showing grouped errors, a detail drawer, and a seven-day activity chart](asset.jpg)
-
 ## Contents
 
 1. [What Buggy is, in plain language](#1-what-buggy-is-in-plain-language)
