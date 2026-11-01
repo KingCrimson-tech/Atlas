@@ -173,15 +173,15 @@ The same error for order 202, and the same stack with a different line number, p
 
 ### 4.3 Why these choices
 
-| Choice | Reason | Tradeoff |
-|---|---|---|
-| Include `service` | Two services can emit identical messages; they are different bugs | Renaming a service creates new groups |
-| First 3 frames | Enough to distinguish call paths, short enough to stay stable | Deep-frame differences are invisible; moving code changes the group |
-| Mask line numbers | Line numbers shift with unrelated edits | Genuinely different lines at the same call site are merged |
-| Mask digits and quoted values | IDs, order numbers, ports, IPs are variable | Messages that differ only by a meaningful number are merged |
-| Preserve case | "Timeout" and "timeout" can be different sources; avoids surprise merging | Case-only changes split a group |
-| SHA-1 truncated to 64 bits | Short, fixed-size key; collision probability is negligible at this scale | Not cryptographic; collisions are theoretically possible |
-| Store the first message | The group needs a readable title | The title can show an old ID (e.g., order 1) even when later events say order 202 |
+| Choice                        | Reason                                                                    | Tradeoff                                                                          |
+| ----------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Include `service`             | Two services can emit identical messages; they are different bugs         | Renaming a service creates new groups                                             |
+| First 3 frames                | Enough to distinguish call paths, short enough to stay stable             | Deep-frame differences are invisible; moving code changes the group               |
+| Mask line numbers             | Line numbers shift with unrelated edits                                   | Genuinely different lines at the same call site are merged                        |
+| Mask digits and quoted values | IDs, order numbers, ports, IPs are variable                               | Messages that differ only by a meaningful number are merged                       |
+| Preserve case                 | "Timeout" and "timeout" can be different sources; avoids surprise merging | Case-only changes split a group                                                   |
+| SHA-1 truncated to 64 bits    | Short, fixed-size key; collision probability is negligible at this scale  | Not cryptographic; collisions are theoretically possible                          |
+| Store the first message       | The group needs a readable title                                          | The title can show an old ID (e.g., order 1) even when later events say order 202 |
 
 ### 4.4 Time handling
 
